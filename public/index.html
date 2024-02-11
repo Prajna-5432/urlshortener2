@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+</head>
+<body>
+
+<h1>URL Shortener</h1>
+
+<form id="shortenForm">
+    <label for="originalUrl">Original URL:</label>
+    <input type="text" id="originalUrl" name="originalUrl" required>
+
+    <label for="customShortcode">Custom Shortcode (optional):</label>
+    <input type="text" id="customShortcode" name="customShortcode">
+
+    <button type="submit">Shorten URL</button>
+</form>
+
+<div id="shortUrlResult"></div>
+
+<script>
+    async function shorturl() {
+        
+    }
+document.getElementById('shortenForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const originalUrl = document.getElementById('originalUrl').value;
+    const customShortcode = document.getElementById('customShortcode').value;
+
+    fetch('/shorten', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            originalUrl,
+            customShortcode,
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('shortUrlResult').innerHTML = `Shortened URL: <a href="${data.shortUrl}" target="_blank">${data.shortUrl}</a>`;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('shortUrlResult').innerHTML = 'Error shortening URL.';
+    });
+});
+</script>
+
+</body>
+</html>
