@@ -7,15 +7,15 @@
     "routes": [
       {
         "src": "/shorten",
-        "dest": "/api/shorten.js"
+        "dest": "/api/server.js"
       },
       {
         "src": "/:shortUrl",
-        "dest": "/api/redirect.js"
+        "dest": "/api/server.js"
       },
       {
         "src": "/(.*)",
-        "dest": "/api/404.js"
+        "dest": "/api/server.js"
       }
     ]
   }
