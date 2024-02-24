@@ -1,16 +1,20 @@
 const express = require('express');
-const serverless = require('serverless-http');
+//const serverless = require('serverless-http');
 const https=require('https');
 const fs= require('fs');
+// const path = require('path');
 
 const app = express();
-// const PORT = 3000;
+const PORT = process.env.PORT ||3000;
 
 const urlMap = {};
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'index.html'));
+// });
 app.use(express.static('public'));
 
 app.post('/shorten', (req, res) => {
@@ -53,8 +57,8 @@ function generateShortUrl() {
 }
 
 // Wrap the Express app with serverless
-module.exports.handler = serverless(app);
+// module.exports.handler = serverless(app);
 
-// app.listen(PORT, () => {
-//     console.log(`Server running at http://localhost:${PORT}`);
-//   });
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+  });

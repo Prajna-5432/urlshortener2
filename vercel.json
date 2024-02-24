@@ -1,22 +1,9 @@
 {
-    "functions": {
-      "api/**/*.js": {
-        "runtime": "vercel-node@2.6.0"
-      }
-    },
-    "routes": [
+    "version": 2,
+    "builds": [
       {
-        "src": "/shorten",
-        "dest": "/api/server.js"
-      },
-      {
-        "src": "/:shortUrl",
-        "dest": "/api/server.js"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/api/server.js"
+        "src": "server.js",
+        "use": "@now/node"
       }
     ]
   }
-  
